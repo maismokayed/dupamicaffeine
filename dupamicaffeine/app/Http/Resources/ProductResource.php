@@ -21,8 +21,11 @@ class ProductResource extends JsonResource
             'description'    => $this->description,
             'price'          => (float) $this->price,
             'stock_quantity' => $this->stock_quantity,
-            'is_active'      => (bool) $this->is_active,
             'added_on'       => $this->created_at ? $this->created_at->format('Y-m-d H:i') : null,
+            'in_wishlist' => auth()->check() 
+                   ? $this->wishlists()->where('user_id', auth()->id())->exists() 
+                   : false,
+
         ];
     }
 }

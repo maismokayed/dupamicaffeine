@@ -16,6 +16,7 @@ class CartResource extends JsonResource
     {
         return [
             'id'=>$this->id,
+            'items' => CartItemsResource::collection($this->whenLoaded('items')),
         ];
     }
 }

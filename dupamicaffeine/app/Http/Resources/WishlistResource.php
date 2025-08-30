@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductReviewResourse extends JsonResource
+class WishlistResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,9 +14,8 @@ class ProductReviewResourse extends JsonResource
      */
     public function toArray(Request $request): array
     {
-          return [
-            'rating'     => $this->rating,
-            'date'       => $this->created_at?->format('Y-m-d'),
+        return [
+            'product' => new ProductResource($this->whenLoaded('product')),
         ];
     }
 }

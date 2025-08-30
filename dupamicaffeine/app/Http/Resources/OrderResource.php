@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResourse extends JsonResource
+class OrderResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,6 +23,7 @@ class OrderResourse extends JsonResource
             'status'          => $this->status,
             'note'            => $this->note,
             'created_at'      => $this->created_at?->format('Y-m-d H:i'),
+            'items'           => OrderItemsResource::collection($this->whenLoaded('items')),
         ];
     }
 }

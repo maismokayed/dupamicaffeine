@@ -19,7 +19,7 @@ class AddItemCartRequest extends FormRequest
     {
         return [
         
-            'cart_id' => 'required|exists:carts,id',
+            'cart_id' => 'nullable|exists:carts,id',
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
         ];
