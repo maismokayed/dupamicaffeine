@@ -79,21 +79,21 @@ class CartController extends Controller
         return response()->json(['error' => 'حدث خطأ: '.$e->getMessage()], 500);
     }
 
-    public function removeItem($cartId, $productId)
-    {
-        $cart = Cart::findOrFail($cartId);
+   public function removeItem($cartId, $productId)
+{
+    $cart = Cart::findOrFail($cartId);
 
-        $item = $cart->items()->where('product_id', $productId)->first();
+    $item = $cart->items()->where('product_id', $productId)->first();
 
-        if (!$item) {
-            return response()->json(['message' => 'المنتج غير موجود في العربة'], 404);
-        }
-
-        $item->delete();
-
-        return response()->json(['message' => 'تمت إزالة المنتج من العربة']);
+    if (!$item) {
+        return response()->json(['message' => 'المنتج غير موجود في العربة'], 404);
     }
+
+    $item->delete();
+
+    return response()->json(['message' => 'تمت إزالة المنتج من العربة']);
 }
+
 }
 
 
