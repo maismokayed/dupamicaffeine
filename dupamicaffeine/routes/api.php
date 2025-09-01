@@ -24,3 +24,11 @@ Route::prefix('categories')->group(function () {
     Route::put('{category}', [CategoryController::class, 'update']); 
     Route::delete('{category}', [CategoryController::class, 'destroy']); 
 });
+//cart
+use App\Http\Controllers\CartController;
+
+Route::prefix('cart')->group(function () {
+    Route::get('{cartId}', [CartController::class, 'show']);
+    Route::post('add', [CartController::class, 'addOrUpdate']);
+    Route::delete('{cartId}/remove/{productId}', [CartController::class, 'removeItem']);
+});
