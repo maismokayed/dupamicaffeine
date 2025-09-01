@@ -78,7 +78,7 @@ class CartController extends Controller
         DB::rollBack();
         return response()->json(['error' => 'حدث خطأ: '.$e->getMessage()], 500);
     }
-
+}
    public function removeItem($cartId, $productId)
 {
     $cart = Cart::findOrFail($cartId);
