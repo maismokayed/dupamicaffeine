@@ -14,4 +14,8 @@ class Coupon extends Model
         'expires_at',
         'is_active',
     ];
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

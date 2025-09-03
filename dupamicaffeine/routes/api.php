@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Api\CouponController;
+
 
 // Auth Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -41,3 +43,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus']);
     });
 });
+//coupon
+Route::middleware(['auth:sanctum','role:admin'])->group(function () {
+    Route::apiResource('coupons', CouponController::class);
+});
+Route::post('coupons/apply', [CouponController::class, 'apply']);
