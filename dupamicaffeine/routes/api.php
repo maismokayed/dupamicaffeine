@@ -48,3 +48,7 @@ Route::middleware(['auth:sanctum','role:admin'])->group(function () {
     Route::apiResource('coupons', CouponController::class);
 });
 Route::post('coupons/apply', [CouponController::class, 'apply']);
+//productreview
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('reviews', [ProductReviewController::class, 'store']);
+});
