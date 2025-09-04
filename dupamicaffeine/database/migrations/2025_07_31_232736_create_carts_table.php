@@ -18,8 +18,7 @@ $table->unsignedBigInteger('user_id');
 $table->timestamps();
 
 
-        }
-    );
+        });
     }
 
     /**
