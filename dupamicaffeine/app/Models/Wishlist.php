@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderItem extends Model
+class Wishlist extends Model
 {
-    protected $fillable = [
-        'order_id',
+     protected $fillable = [
+        'user_id',
         'product_id',
-        'quantity',
-        'price',
     ];
-    public function order()
+
+    public function user()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(User::class);
     }
 
     public function product()
