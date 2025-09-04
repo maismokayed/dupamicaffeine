@@ -52,3 +52,11 @@ Route::post('coupons/apply', [CouponController::class, 'apply']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('reviews', [ProductReviewController::class, 'store']);
 });
+//wishlist
+use App\Http\Controllers\Api\WishlistController;
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('wishlist', [WishlistController::class, 'index']);
+     Route::post('wishlist', [WishlistController::class, 'store']);
+    Route::delete('wishlist/{productId}', [WishlistController::class, 'destroy']);
+});
