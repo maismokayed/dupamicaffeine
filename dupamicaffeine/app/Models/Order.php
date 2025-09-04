@@ -15,4 +15,21 @@ class Order extends Model
         'status',
         'note',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function coupon()
+    {
+        return $this->belongsTo(Coupon::class);
+    }
+
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
 }
