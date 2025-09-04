@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders', [OrderController::class, 'index']);
     Route::middleware('role:admin')->group(function () {
         Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus']);
+        Route::get('/admin/orders', [OrderController::class, 'indexAdmin']);
     });
 });
 //coupon

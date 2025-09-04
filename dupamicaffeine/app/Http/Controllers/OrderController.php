@@ -105,6 +105,16 @@ class OrderController extends Controller
             'data'    => $orders,
         ]);
     }
+    // عرض الطلبات للادمن
+    public function indexAdmin()
+{
+    $orders = Order::with(['user', 'coupon'])->latest()->get();
+
+    return response()->json([
+        'message' => 'جميع الطلبات',
+        'data'    => $orders
+    ]);
+}
 
     // 3) تحديث حالة الطلب (للأدمن فقط)
     public function updateStatus(Request $request, $id)
