@@ -35,6 +35,11 @@ class CategoryController extends Controller
     }
      public function destroy(Category $category)
     {
+        if ($category->products()->count() > 0) {
+        return response()->json([
+            'message' => 'لا يمكن حذف التصنيف لأنه يحتوي على منتجات مرتبطة.'
+        ], 400);
+    }
         $category->delete();
 
         return response()->json(null, 204);
