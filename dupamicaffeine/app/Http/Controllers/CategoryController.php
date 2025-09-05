@@ -42,7 +42,10 @@ class CategoryController extends Controller
     }
         $category->delete();
 
-        return response()->json(null, 204);
+        return response()->json([
+    'message' => 'تم حذف التصنيف بنجاح',
+    'id'      => $category->id
+], 200);
     }
 
 }

@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Http\Requests\AddItemCartRequest;
+use App\Http\Requests\UpdateQuantityRequest;
 use App\Http\Resources\CartResource;
 use Illuminate\Support\Facades\DB;
 
