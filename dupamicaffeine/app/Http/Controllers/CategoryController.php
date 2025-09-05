@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Http\Requests\CategoryStoreRequest;
-use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 
 class CategoryController extends Controller
@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         return response()->json(Category::all());
     }
-    public function store(CategoryStoreRequest $request)
+    public function store(StoreCategoryRequest $request)
     {
         $category = Category::create($request->validated());
 
@@ -27,7 +27,7 @@ class CategoryController extends Controller
         return response()->json($category);
     }
     
-     public function update(CategoryUpdateRequest $request, Category $category)
+     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
 
@@ -35,9 +35,17 @@ class CategoryController extends Controller
     }
      public function destroy(Category $category)
     {
+        if ($category->products()->count() > 0) {
+        return response()->json([
+            'message' => 'لا يمكن حذف التصنيف لأنه يحتوي على منتجات مرتبطة.'
+        ], 400);
+    }
         $category->delete();
 
-        return response()->json(null, 204);
+        return response()->json([
+    'message' => 'تم حذف التصنيف بنجاح',
+    'id'      => $category->id
+], 200);
     }
 
 }

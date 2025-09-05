@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Http\Resources\ProductResource;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -28,7 +32,7 @@ class ProductController extends Controller
     return ProductResource::collection($query->paginate(10));
 }
 
-public function store(ProductRequest $request)
+public function store(StoreProductRequest $request)
 {
     $product = Product::create($request->validated());
     return new ProductResource($product);
@@ -39,7 +43,7 @@ public function show(Product $product)
     return new ProductResource($product);
 }
 
-public function update(ProductRequest $request, Product $product)
+public function update(UpdateProductRequest $request, Product $product)
 {
     $product->update($request->validated());
     return new ProductResource($product);
