@@ -1,5 +1,6 @@
-<?php
 
+<?php
+/*
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
@@ -63,3 +64,4 @@ Route::middleware('auth:sanctum')->group(function () {
      Route::post('wishlist', [WishlistController::class, 'store']);
     Route::delete('wishlist/{productId}', [WishlistController::class, 'destroy']);
 });
+*/

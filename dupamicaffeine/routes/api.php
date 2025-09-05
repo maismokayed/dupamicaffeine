@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('reviews', [ProductReviewController::class, 'store']);
 });
 //wishlist
-use App\Http\Controllers\Api\WishlistController;
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('wishlist', [WishlistController::class, 'index']);
