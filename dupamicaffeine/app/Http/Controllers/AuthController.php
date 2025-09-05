@@ -13,21 +13,24 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
-    {
-        $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'phone'    => $request->phone,
-            'password' => Hash::make($request->password),
-        ]);
-          $token = $user->createToken('auth_token')->plainTextToken;
+{
+    $user = User::create([
+        'name'     => $request->name,
+        'email'    => $request->email,
+        'phone'    => $request->phone,
+        'password' => Hash::make($request->password),
+    ]);
 
-        return response()->json([
-            'user'  => new UserResource($user),
-            'token' => $token,
-        ], 201);
-    }
+    
+    $user->assignRole(RoleEnum::CUSTOMER->value);
 
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    return response()->json([
+        'user'  => new UserResource($user),
+        'token' => $token,
+    ], 201);
+}
     public function login(LoginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
