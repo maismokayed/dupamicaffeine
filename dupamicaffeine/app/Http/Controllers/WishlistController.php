@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\WishlistRequest;
+use App\Http\Requests\StoreWishlistRequest;
 use App\Models\Wishlist;
 
 class WishlistController extends Controller
@@ -17,7 +17,7 @@ class WishlistController extends Controller
 
         return response()->json($wishlist);
     }
-    public function store(WishlistRequest $request)
+    public function store(StoreWishlistRequest $request)
     {
         $wishlist = Wishlist::firstOrCreate([
             'user_id'    => auth()->id(),

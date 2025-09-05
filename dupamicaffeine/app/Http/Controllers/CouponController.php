@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CouponRequest;
+use App\Http\Requests\StoreCouponRequest;
+use App\Http\Requests\UpdateCouponRequest;
+use App\Http\Resources\CouponResource;
 use App\Models\Coupon;
 use Carbon\Carbon;
 
@@ -14,9 +16,9 @@ class CouponController extends Controller
      public function index()
     {
         $coupons = Coupon::latest()->paginate(10);
-        return response()->json($coupons);
+        return CouponResource::collection($coupons);
     }
- public function store(CouponRequest $request)
+ public function store(StoreCouponRequest $request)
     {
         $coupon = Coupon::create($request->validated());
 
@@ -27,16 +29,17 @@ class CouponController extends Controller
     }
     public function show(Coupon $coupon)
     {
-        return response()->json($coupon);
+        return new CouponResource($coupon);
+
     }
- public function update(CouponRequest $request, Coupon $coupon)
+ public function update(UpdateCouponRequest $request, Coupon $coupon)
     {
         $coupon->update($request->validated());
 
         return response()->json([
-            'message' => 'تم تحديث الكوبون بنجاح',
-            'data'    => $coupon
-        ]);
+    'message' => 'تم تحديث الكوبون بنجاح',
+    'data'    => new CouponResource($coupon)
+]);
     }
     public function destroy(Coupon $coupon)
     {
@@ -66,8 +69,8 @@ class CouponController extends Controller
         }
 
         return response()->json([
-            'message' => 'الكوبون صالح',
-            'data'    => $coupon
-        ]);
+    'message' => 'الكوبون صالح',
+    'data'    => new CouponResource($coupon)
+]);
     }
 }

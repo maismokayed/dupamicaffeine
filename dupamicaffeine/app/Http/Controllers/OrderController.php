@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrderRequest;
+use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     // 1) إنشاء طلب جديد
-    public function store(OrderRequest $request)
+    public function store(StoreOrderRequest $request)
     {
         $user = $request->user();
         $cartItems = DB::table('cart_items')->where('user_id', $user->id)->get();
