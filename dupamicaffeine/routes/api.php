@@ -16,6 +16,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 //products
+//public
 Route::prefix('products')->group(function () {
      Route::get('/', [ProductController::class, 'index']);
       Route::get('{product}', [ProductController::class, 'show']);
@@ -28,6 +29,7 @@ Route::prefix('products')->group(function () {
         ->middleware(['auth:sanctum', 'role:Admin']);
 });
 //category
+//public
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class, 'index']);       
     Route::get('{category}', [CategoryController::class, 'show']);   
@@ -40,7 +42,6 @@ Route::prefix('categories')->group(function () {
         ->middleware(['auth:sanctum', 'role:Admin']);
 
 });
-//cart
 // Cart (Customer فقط)
 Route::prefix('cart')->middleware(['auth:sanctum', 'role:Customer'])->group(function () {
     Route::get('{cartId}', [CartController::class, 'show']);
