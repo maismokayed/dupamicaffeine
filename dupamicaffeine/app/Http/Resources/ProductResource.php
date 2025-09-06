@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ProductResource extends JsonResource
 {
@@ -25,7 +26,15 @@ class ProductResource extends JsonResource
             'in_wishlist' => auth()->check() 
                    ? $this->wishlists()->where('user_id', auth()->id())->exists() 
                    : false,
-
+            'images'      => $this->images->map(function ($img) {
+                return [
+                    'id'       => $img->id,
+                    'url'      => Storage::disk(config('filesystems.default'))->url($img->image_path),
+                    'alt'      => $img->alt_text,
+                    'position' => $img->position,
+                ];
+            }),
         ];
     }
 }
+
