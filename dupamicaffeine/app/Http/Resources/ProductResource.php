@@ -25,7 +25,15 @@ class ProductResource extends JsonResource
             'in_wishlist' => auth()->check() 
                    ? $this->wishlists()->where('user_id', auth()->id())->exists() 
                    : false,
-
+            'images'      => $this->images->map(function ($img) {
+                return [
+                    'id'       => $img->id,
+                    'url'      => Storage::disk(config('filesystems.default'))->url($img->image_path),
+                    'alt'      => $img->alt_text,
+                    'position' => $img->position,
+                ];
+            }),
         ];
     }
 }
+
