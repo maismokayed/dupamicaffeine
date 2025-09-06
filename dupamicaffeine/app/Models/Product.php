@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ProductImage;
 
 class Product extends Model
 {
@@ -15,4 +16,8 @@ class Product extends Model
         'is_active'
 
     ];
-}
+public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+  }
