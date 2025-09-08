@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
 use App\Models\Wishlist;
+use App\Models\CartItem;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\OrderItem;
+use App\Models\Category;
+use App\Models\ProductReview;
 
 class Product extends Model
 {
@@ -18,6 +22,18 @@ class Product extends Model
         'is_active'
 
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+ public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
     public function images(): HasMany
     {
         return $this->hasMany(ProductImage::class)->orderBy('position');
@@ -26,5 +42,9 @@ class Product extends Model
     public function wishlists(): HasMany
     {
         return $this->hasMany(Wishlist::class);
+    }
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
     }
   }
